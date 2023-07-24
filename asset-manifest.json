@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/vendange-no-adding/static/css/main.30ea52ad.css",
+    "main.js": "/vendange-no-adding/static/js/main.0095fa98.js",
+    "static/js/787.e3dc797c.chunk.js": "/vendange-no-adding/static/js/787.e3dc797c.chunk.js",
+    "index.html": "/vendange-no-adding/index.html",
+    "main.30ea52ad.css.map": "/vendange-no-adding/static/css/main.30ea52ad.css.map",
+    "main.0095fa98.js.map": "/vendange-no-adding/static/js/main.0095fa98.js.map",
+    "787.e3dc797c.chunk.js.map": "/vendange-no-adding/static/js/787.e3dc797c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30ea52ad.css",
+    "static/js/main.0095fa98.js"
+  ]
+}
