@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { HashRouter, Routes, Route } from "react-router-dom";
 
+import App from "./Home.jsx";
 import VendangePage from "./components/pages/VendangesPage";
+import DailyPage from "./components/pages/DailyPage/DailyPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,6 +18,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/vendanges" element={<VendangePage />} />
+                <Route path="/daily" element={<DailyPage />} />
             </Routes>
         </HashRouter>
     </React.StrictMode>

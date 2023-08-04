@@ -1,0 +1,140 @@
+.daily-container {
+    margin: 0;
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    position: relative;
+}
+
+.daily-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.aliments-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    row-gap: 20px;
+}
+
+.aliment-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-size: 1.3rem;
+}
+
+.aliment-item-0 {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aliment-item:hover {
+    background-color: #ccc;
+}
+
+.ticket {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ticket-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #0c2034;
+    background-color: #0c2034;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ticket-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+}
+
+.ticket-item:last-child {
+    border-bottom: none;
+}
+
+.ticket-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #0c2034;
+    background-color: #0c2034;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.summary-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.summary-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.summary-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.summary-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #0c2034;
+    background-color: #0c2034;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

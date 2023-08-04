@@ -1,17 +1,19 @@
 import "./DishCard.css";
 
 function DishCard(props) {
+    const plat = props.plat;
+
     return (
-        <div key={props.plat.id} className="card-wrapper">
+        <div key={plat.id} className="dish-wrapper">
             <span className="dish-name">
-                {props.plat.nom} - {props.plat.prix} €
+                {plat.nom} - {plat.prix} €
             </span>
-            <span className="dish-quantity">{props.plat.quantite}</span>
+            <span className="dish-quantity">{plat.quantite}</span>
             <div className="button-wrapper">
                 <button
                     className="button primary"
                     onClick={() => {
-                        props.onIncrement(props.plat);
+                        props.onIncrement(plat);
                     }}
                 >
                     +1
@@ -19,7 +21,7 @@ function DishCard(props) {
                 <button
                     className="button secondary"
                     onClick={() => {
-                        props.onDecrement(props.plat);
+                        props.onDecrement(plat);
                     }}
                 >
                     -1
