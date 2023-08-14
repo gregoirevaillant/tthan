@@ -6,7 +6,7 @@ function Home() {
     const navigate = useNavigate();
     return (
         <div className="home-wrapper">
-            <h1 className="home-title">Choisissez votre caisse</h1>
+            <h1 className="home-title">Choisissez votre caisse </h1>
             <div className="navigations-wrapper">
                 <button
                     className="navigation"
@@ -24,8 +24,14 @@ function Home() {
                 >
                     Caisse des Vendanges
                 </button>
-                <button className="navigation disabled">...</button>
-                <button className="navigation disabled">...</button>
+                <button
+                    className="navigation"
+                    onClick={() => {
+                        navigate("/events");
+                    }}
+                >
+                    Caisse des évènements
+                </button>
             </div>
         </div>
     );

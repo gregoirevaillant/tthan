@@ -5,10 +5,12 @@ function DishCard(props) {
 
     return (
         <div key={plat.id} className="dish-wrapper">
-            <span className="dish-name">
-                {plat.nom} - {plat.prix} €
-            </span>
-            <span className="dish-quantity">{plat.quantite}</span>
+            <div>
+                <span className="dish-name">
+                    {plat.nom} - {plat.prix} €
+                </span>
+                <span className="dish-quantity">{plat.quantite}</span>
+            </div>
             <div className="button-wrapper">
                 <button
                     className="button primary"

@@ -11,10 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import data from "./data.json";
-// id
-// category
-// name
-// price
+import { useNavigate } from "react-router-dom";
 
 function DailyPage() {
     const [selectedAliments, setSelectedAliments] = useState([]);
@@ -126,12 +123,14 @@ function DailyPage() {
         link.click();
     };
 
+    const navigate = useNavigate();
+
     return (
         <div className="daily-container">
             <button
                 className="back-button"
                 onClick={() => {
-                    window.location.href = "/tthan";
+                    navigate("/");
                 }}
             >
                 <FontAwesomeIcon icon={faArrowLeft} />
