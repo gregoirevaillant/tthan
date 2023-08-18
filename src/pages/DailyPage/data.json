@@ -1,11 +1,5 @@
 [
     {
-        "id": "b8c02cd8",
-        "category": "plat",
-        "name": "Bun Bo",
-        "price": 11
-    },
-    {
         "id": "b8c0307a",
         "category": "plat",
         "name": "Banh mi",
@@ -16,6 +10,12 @@
         "category": "plat",
         "name": "Goi cuon",
         "price": 5
+    },
+    {
+        "id": "b8c02cd8",
+        "category": "plat",
+        "name": "Bun Bo",
+        "price": 11
     },
     {
         "id": "b8c03494",
@@ -60,28 +60,28 @@
         "price": 0
     },
     {
-        "id": "b8c04c18",
-        "category": "dessert",
-        "name": "Coeur matcha",
-        "price": 3
-    },
-    {
         "id": "b8c04d94",
         "category": "dessert",
         "name": "Fruits",
         "price": 2
     },
     {
-        "id": "b8c05118",
+        "id": "b8c04c18",
         "category": "dessert",
-        "name": "Tapioca",
-        "price": 3.5
+        "name": "Coeur matcha",
+        "price": 3
     },
     {
         "id": "b8c05776",
         "category": "dessert",
         "name": "Crumble",
         "price": 3
+    },
+    {
+        "id": "b8c05118",
+        "category": "dessert",
+        "name": "Tapioca",
+        "price": 3.5
     },
     {
         "id": "b8c04a323",

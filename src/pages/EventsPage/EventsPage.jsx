@@ -23,6 +23,8 @@ function EventsPage() {
         return storedPlats;
     });
 
+    console.log(plats);
+
     useEffect(() => {
         localStorage.setItem("plats", JSON.stringify(plats));
     }, [plats]);
@@ -63,7 +65,12 @@ function EventsPage() {
                     quantite: 0,
                     prix: newPlatPrice,
                 };
-                setPlats([...plats, newPlat]);
+                if (plats) {
+                    setPlats([...plats, newPlat]);
+                } else {
+                    setPlats([newPlat]);
+                }
+
                 setNewPlatName("");
                 setNewPlatPrice("");
             }
@@ -112,7 +119,7 @@ function EventsPage() {
                 <Button onClick={() => navigate("/")} variant="primary">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Button>
-                {plats.length > 0 ? (
+                {plats ? (
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         {plats.map((plat) => (
                             <div
@@ -155,10 +162,10 @@ function EventsPage() {
                         <p className="text-center">
                             Ajoutez un plat pour commencer
                         </p>
-                        {/* down arrow */}
                     </div>
                 )}
             </div>
+
             <Table striped bordered>
                 <thead>
                     <tr>
@@ -177,36 +184,53 @@ function EventsPage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {plats.map((plat) => (
-                        <tr key={plat.id}>
-                            <td className="text-center">{plat.nom}</td>
-                            <td className="text-center">{plat.quantite}</td>
-                            <td className="text-center">
-                                {(plat.quantite * plat.prix).toFixed(2)}
-                            </td>
-                            <td className="text-center">
-                                <Button
-                                    variant="danger"
-                                    onClick={() => handleRemovePlat(plat.id)}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
+                    {plats ? (
+                        <>
+                            {plats.map((plat) => (
+                                <tr key={plat.id}>
+                                    <td className="text-center">{plat.nom}</td>
+                                    <td className="text-center">
+                                        {plat.quantite}
+                                    </td>
+                                    <td className="text-center">
+                                        {(plat.quantite * plat.prix).toFixed(2)}
+                                    </td>
+                                    <td className="text-center">
+                                        <Button
+                                            variant="danger"
+                                            onClick={() =>
+                                                handleRemovePlat(plat.id)
+                                            }
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} />
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </tbody>
             </Table>
             <div className="d-flex justify-content-center align-items-center gap-3">
                 <h3>Total : </h3>
                 <h3>
-                    {plats
+                    {plats ? (
+                        <>
+                            {plats
 
-                        .reduce(
-                            (acc, plat) => acc + plat.quantite * plat.prix,
-                            0
-                        )
-                        .toFixed(2)}
-                    €
+                                .reduce(
+                                    (acc, plat) =>
+                                        acc + plat.quantite * plat.prix,
+                                    0
+                                )
+                                .toFixed(2)}
+                            €
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </h3>
             </div>
             <div className="d-flex gap-2">
