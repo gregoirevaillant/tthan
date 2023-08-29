@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-
-import DishCard from "../../components/DishCard";
-import "./VendangesPage.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+
+import DishCard from "../../components/DishCard";
+import "./VendangesPage.css";
 
 function VendangesPage() {
     const initialPlatsCaisse1 = [
@@ -14,6 +13,7 @@ function VendangesPage() {
         { id: 2, nom: "Nems poulet", quantite: 0, prix: 5.5 },
         { id: 3, nom: "Samoussa légumes", quantite: 0, prix: 5.5 },
         { id: 4, nom: "Bánh mì", quantite: 0, prix: 5.0 },
+        { id: 9, nom: "Chips", quantite: 0, prix: 1.0 },
         { id: 5, nom: "Gaufre Choco / Cara", quantite: 0, prix: 3.5 },
         { id: 6, nom: "Gaufre Sucre", quantite: 0, prix: 2.5 },
         { id: 7, nom: "Fruits", quantite: 0, prix: 2.5 },
@@ -25,6 +25,7 @@ function VendangesPage() {
         { id: 2, nom: "Nouilles poulet", quantite: 0, prix: 5.5 },
         { id: 3, nom: "Samoussa légumes", quantite: 0, prix: 5.5 },
         { id: 4, nom: "Bánh mì", quantite: 0, prix: 5.0 },
+        { id: 9, nom: "chips", quantite: 0, prix: 1.0 },
         { id: 5, nom: "Gaufre Choco / Cara", quantite: 0, prix: 3.5 },
         { id: 6, nom: "Gaufre Sucre", quantite: 0, prix: 2.5 },
         { id: 7, nom: "Fruits", quantite: 0, prix: 2.5 },

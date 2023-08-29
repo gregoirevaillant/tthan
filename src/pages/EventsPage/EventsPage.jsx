@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowLeft,
     faTrash,
-    faPlus,
-    faMinus,
     faFileExport,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { useNavigate } from "react-router-dom";
-
 import { Button, Table, Form } from "react-bootstrap";
-
 import Papa from "papaparse";
+
+import DishCard from "../../components/DishCard";
+import "./EventsPage.css";
 
 function EventsPage() {
     const [validated, setValidated] = useState(false);
@@ -22,8 +19,6 @@ function EventsPage() {
         const storedPlats = JSON.parse(localStorage.getItem("plats"));
         return storedPlats;
     });
-
-    console.log(plats);
 
     useEffect(() => {
         localStorage.setItem("plats", JSON.stringify(plats));
@@ -75,7 +70,6 @@ function EventsPage() {
                 setNewPlatPrice("");
             }
         }
-
         setValidated(true);
     };
 
@@ -89,16 +83,6 @@ function EventsPage() {
     };
 
     const navigate = useNavigate();
-
-    const handleExportSummary = () => {
-        const jsonData = JSON.stringify(plats);
-        const blob = new Blob([jsonData], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.download = `daily-summary-${new Date().toLocaleDateString()}.json`;
-        link.href = url;
-        link.click();
-    };
 
     const handleExportSummaryCSV = () => {
         const csv = Papa.unparse(plats);
@@ -119,53 +103,29 @@ function EventsPage() {
                 <Button onClick={() => navigate("/")} variant="primary">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Button>
-                {plats ? (
-                    <div className="d-flex flex-column justify-content-center align-items-center">
-                        {plats.map((plat) => (
-                            <div
-                                key={plat.id}
-                                className="d-flex justify-content-between align-items-center my-2 gap-5 border border-2 border-primary p-3 rounded w-50"
-                            >
-                                <div>
-                                    <h3 className="m-0">
-                                        {plat.nom} - {plat.prix}€
-                                        &nbsp;&nbsp;&nbsp;
-                                        <span className="badge bg-primary rounded-pill">
-                                            x{plat.quantite}
-                                        </span>
-                                    </h3>
-                                </div>
-                                <div className="d-flex justify-content-center align-items-center gap-5">
-                                    <Button
-                                        variant="primary"
-                                        onClick={() =>
-                                            handleQuantityChange(plat, true)
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faPlus} />
-                                    </Button>
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() =>
-                                            handleQuantityChange(plat, false)
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faMinus} />
-                                    </Button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
+                {plats === null ? (
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         <h1 className="text-center">Aucun plat</h1>
                         <p className="text-center">
                             Ajoutez un plat pour commencer
                         </p>
                     </div>
+                ) : (
+                    <div className="plats-grid-container">
+                        {plats.map((plat) => (
+                            <DishCard
+                                plat={plat}
+                                onIncrement={() =>
+                                    handleQuantityChange(plat, true)
+                                }
+                                onDecrement={() =>
+                                    handleQuantityChange(plat, false)
+                                }
+                            />
+                        ))}
+                    </div>
                 )}
             </div>
-
             <Table striped bordered>
                 <thead>
                     <tr>
@@ -234,9 +194,6 @@ function EventsPage() {
                 </h3>
             </div>
             <div className="d-flex gap-2">
-                <Button onClick={handleExportSummary}>
-                    <FontAwesomeIcon icon={faFileExport} /> JSON
-                </Button>
                 <Button onClick={handleExportSummaryCSV}>
                     <FontAwesomeIcon icon={faFileExport} /> CSV
                 </Button>
@@ -266,9 +223,7 @@ function EventsPage() {
                             placeholder="Prix du plat"
                             value={newPlatPrice}
                             required
-                            onChange={(e) =>
-                                setNewPlatPrice(parseFloat(e.target.value))
-                            }
+                            onChange={(e) => setNewPlatPrice(e.target.value)}
                         />
                     </Form.Group>
                     <Button variant="success" onClick={handleAddNewPlat}>

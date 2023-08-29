@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-
-import Aliment from "./Aliment";
-import Ticket from "./Ticket";
-
-import "./DailyPage.css";
-
-import Papa from "papaparse";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import Papa from "papaparse";
 
 import data from "./data.json";
-import { useNavigate } from "react-router-dom";
+import Aliment from "./Aliment";
+import Ticket from "./Ticket";
+import "./DailyPage.css";
 
 function DailyPage() {
     const [selectedAliments, setSelectedAliments] = useState([]);
@@ -28,7 +24,7 @@ function DailyPage() {
 
     const handleEndDay = () => {
         const confirmEndDay = window.confirm(
-            `Are you sure you want to end the day? The current data will be reset.`
+            `Etes vous sur de vouloir terminer le service ?\n\nLe résumé du jour sera supprimé.`
         );
         if (confirmEndDay) {
             localStorage.removeItem("dayStarted");
@@ -100,16 +96,6 @@ function DailyPage() {
         setTotal(0);
     };
 
-    const handleExportSummary = () => {
-        const jsonData = JSON.stringify(orderSummary);
-        const blob = new Blob([jsonData], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.download = `daily-summary-${new Date().toLocaleDateString()}.json`;
-        link.href = url;
-        link.click();
-    };
-
     const handleExportSummaryCSV = () => {
         const csv = Papa.unparse(orderSummary);
         const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
@@ -167,20 +153,12 @@ function DailyPage() {
                     </div>
                     <div className="summary-buttons">
                         {orderSummary.length > 0 && (
-                            <>
-                                <button
-                                    className="button"
-                                    onClick={handleExportSummary}
-                                >
-                                    Télécharger le résumé (JSON)
-                                </button>
-                                <button
-                                    className="button"
-                                    onClick={handleExportSummaryCSV}
-                                >
-                                    Télécharger le résumé (CSV)
-                                </button>
-                            </>
+                            <button
+                                className="button"
+                                onClick={handleExportSummaryCSV}
+                            >
+                                Télécharger le résumé (CSV)
+                            </button>
                         )}
                         <button className="button" onClick={handleEndDay}>
                             Terminer le service

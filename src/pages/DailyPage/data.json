@@ -1,5 +1,11 @@
 [
     {
+        "id": "b8c03494",
+        "category": "plat",
+        "name": "Plat du jour",
+        "price": 10
+    },
+    {
         "id": "b8c0307a",
         "category": "plat",
         "name": "Banh mi",
@@ -18,28 +24,22 @@
         "price": 11
     },
     {
-        "id": "b8c03494",
-        "category": "plat",
-        "name": "Plat du jour",
-        "price": 10
-    },
-    {
         "id": "b8c03692",
         "category": "plat",
         "name": "Soupe",
         "price": 11
     },
     {
-        "id": "b8c03d36",
-        "category": "boisson",
-        "name": "Soft",
-        "price": 2
-    },
-    {
         "id": "b8c04434",
         "category": "boisson",
         "name": "Eau",
         "price": 1.5
+    },
+    {
+        "id": "b8c03d36",
+        "category": "boisson",
+        "name": "Soft",
+        "price": 2
     },
     {
         "id": "b8c046be",
@@ -66,15 +66,15 @@
         "price": 2
     },
     {
-        "id": "b8c04c18",
-        "category": "dessert",
-        "name": "Coeur matcha",
-        "price": 3
-    },
-    {
         "id": "b8c05776",
         "category": "dessert",
         "name": "Crumble",
+        "price": 3
+    },
+    {
+        "id": "b8c04c18",
+        "category": "dessert",
+        "name": "Coeur matcha",
         "price": 3
     },
     {
