@@ -6,6 +6,12 @@
         "price": 10
     },
     {
+        "id": "b8c02cd8",
+        "category": "plat",
+        "name": "Bun Bo",
+        "price": 11
+    },
+    {
         "id": "b8c0307a",
         "category": "plat",
         "name": "Banh mi",
@@ -16,12 +22,6 @@
         "category": "plat",
         "name": "Goi cuon",
         "price": 5
-    },
-    {
-        "id": "b8c02cd8",
-        "category": "plat",
-        "name": "Bun Bo",
-        "price": 11
     },
     {
         "id": "b8c03692",
