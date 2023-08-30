@@ -141,15 +141,53 @@ function DailyPage() {
                             onPlaceInSummary={handlePlaceInSummary}
                         />
                     </div>
-                    <div className="summary">
+                    <div className="summary-container">
                         <h2>Daily Summary:</h2>
-                        <div className="summary-products">
+                        {/* <div className="summary-products">
                             {orderSummary.map((aliment, index) => (
                                 <div key={index} className="summary-product">
                                     {aliment.name} x{aliment.count}
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
+                        <table className="summary-table">
+                            <thead className="summary-table-head">
+                                <tr className="summary-table-row">
+                                    <th className="summary-table-header">
+                                        Plat
+                                    </th>
+                                    <th className="summary-table-header">
+                                        Quantité
+                                    </th>
+                                    <th className="summary-table-header">
+                                        Prix Total (€)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="summary-table-body">
+                                {orderSummary.map((aliment, index) => (
+                                    <tr
+                                        className="summary-table-row"
+                                        key={index}
+                                        style={
+                                            index % 2 === 0
+                                                ? { backgroundColor: "#f2f2f2" }
+                                                : { backgroundColor: "#fff" }
+                                        }
+                                    >
+                                        <td className="summary-table-data">
+                                            {aliment.name}
+                                        </td>
+                                        <td className="summary-table-data">
+                                            {aliment.count}
+                                        </td>
+                                        <td className="summary-table-data">
+                                            {aliment.price * aliment.count}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                     <div className="summary-buttons">
                         {orderSummary.length > 0 && (

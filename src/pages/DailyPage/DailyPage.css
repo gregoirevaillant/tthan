@@ -98,11 +98,52 @@
     cursor: pointer;
 }
 
-.summary {
+.summary-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+}
+
+.summary-table {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.summary-table-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.summary-table-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.summary-table-header {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.summary-table-data {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
 }
 
 .summary-products {
