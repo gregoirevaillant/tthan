@@ -1,37 +1,24 @@
-import { useNavigate } from "react-router-dom";
-
 import "./Home.css";
 
+import HomeButton from "./components/HomeButton";
+
 function Home() {
-    const navigate = useNavigate();
     return (
-        <div className="home-wrapper">
+        <div className="home-page">
             <h1 className="home-title">Choisissez votre caisse </h1>
-            <div className="navigations-wrapper">
-                <button
-                    className="navigation"
-                    onClick={() => {
-                        navigate("/daily");
-                    }}
-                >
-                    Caisse Tthàn cang-tin
-                </button>
-                <button
-                    className="navigation"
-                    onClick={() => {
-                        navigate("/vendanges");
-                    }}
-                >
-                    Caisse des Vendanges
-                </button>
-                <button
-                    className="navigation"
-                    onClick={() => {
-                        navigate("/events");
-                    }}
-                >
-                    Caisse des évènements
-                </button>
+            <div className="home-buttons">
+                <HomeButton
+                    destination="daily"
+                    children="Caisse Tthàn cang-tin"
+                />
+                <HomeButton
+                    destination="vendanges"
+                    children="Caisse des Vendanges"
+                />
+                <HomeButton
+                    destination="events"
+                    children="Caisse des évènements"
+                />
             </div>
         </div>
     );

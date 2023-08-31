@@ -1,14 +1,12 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
-
-import App from "./Home.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import VendangePage from "./pages/VendangesPage/VendangesPage";
 import DailyPage from "./pages/DailyPage/DailyPage";
 import EventsPage from "./pages/EventsPage/EventsPage";
+
+import App from "./Home.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -22,5 +20,3 @@ root.render(
         </Routes>
     </HashRouter>
 );
-
-reportWebVitals();

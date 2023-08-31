@@ -1,4 +1,4 @@
-.home-wrapper {
+.home-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,14 +15,14 @@
     margin: 2rem 0;
 }
 
-.navigations-wrapper {
+.home-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 2rem;
 }
 
-.navigation {
+.home-button {
     padding: 15px 20px;
     border-radius: 10px;
     border: 5px solid #0c2034;
@@ -33,20 +33,14 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 2rem;
+    transition: all 0.2s ease-in-out;
 }
 
-.navigation:hover {
+.home-button:hover {
     background-color: #0c2034;
     color: #f5f5f5;
 }
 
-.navigation:active {
-    background-color: #f5f5f5;
-    color: #0c2034;
-}
-
-.navigation.disabled {
-    background-color: #d3d3d3;
-    color: #a9a9a9;
-    cursor: not-allowed;
+.home-button:active {
+    transform: scale(0.9);
 }

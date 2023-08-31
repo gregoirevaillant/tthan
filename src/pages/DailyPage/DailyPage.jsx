@@ -14,7 +14,6 @@ function DailyPage() {
     const [total, setTotal] = useState(0);
     const [orderSummary, setOrderSummary] = useState([]);
     const [allOrders, setAllOrders] = useState({});
-
     const [dayStarted, setDayStarted] = useState(false);
 
     const handleStartDay = () => {
@@ -165,27 +164,35 @@ function DailyPage() {
                                 </tr>
                             </thead>
                             <tbody className="summary-table-body">
-                                {orderSummary.map((aliment, index) => (
-                                    <tr
-                                        className="summary-table-row"
-                                        key={index}
-                                        style={
-                                            index % 2 === 0
-                                                ? { backgroundColor: "#f2f2f2" }
-                                                : { backgroundColor: "#fff" }
-                                        }
-                                    >
-                                        <td className="summary-table-data">
-                                            {aliment.name}
-                                        </td>
-                                        <td className="summary-table-data">
-                                            {aliment.count}
-                                        </td>
-                                        <td className="summary-table-data">
-                                            {aliment.price * aliment.count}
-                                        </td>
-                                    </tr>
-                                ))}
+                                {orderSummary
+                                    .sort((a, b) => b.count - a.count)
+                                    .map((aliment, index) => (
+                                        <tr
+                                            className="summary-table-row"
+                                            key={index}
+                                            style={
+                                                index % 2 === 0
+                                                    ? {
+                                                          backgroundColor:
+                                                              "#f2f2f2",
+                                                      }
+                                                    : {
+                                                          backgroundColor:
+                                                              "#fff",
+                                                      }
+                                            }
+                                        >
+                                            <td className="summary-table-data">
+                                                {aliment.name}
+                                            </td>
+                                            <td className="summary-table-data">
+                                                {aliment.count}
+                                            </td>
+                                            <td className="summary-table-data">
+                                                {aliment.price * aliment.count}
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
