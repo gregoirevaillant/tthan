@@ -77,7 +77,6 @@ function EventsPage() {
         if (!window.confirm("Voulez-vous supprimer ce plat ?")) {
             return;
         }
-
         const updatedPlats = plats.filter((plat) => plat.id !== platId);
         setPlats(updatedPlats);
     };

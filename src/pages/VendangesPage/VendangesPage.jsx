@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -7,82 +7,63 @@ import DishCard from "../../components/DishCard";
 import "./VendangesPage.css";
 
 function VendangesPage() {
-    const initialPlatsCaisse1 = [
-        { id: 1, nom: "Bún bò", quantite: 0, prix: 12 },
-        { id: 8, nom: "Nouilles poulet", quantite: 0, prix: 11 },
-        { id: 2, nom: "Nems poulet", quantite: 0, prix: 5.5 },
-        { id: 3, nom: "Samoussa légumes", quantite: 0, prix: 5.5 },
-        { id: 4, nom: "Bánh mì", quantite: 0, prix: 5.0 },
-        { id: 9, nom: "Chips", quantite: 0, prix: 1.0 },
-        { id: 5, nom: "Gaufre Choco / Cara", quantite: 0, prix: 3.5 },
-        { id: 6, nom: "Gaufre Sucre", quantite: 0, prix: 2.5 },
-        { id: 7, nom: "Fruits", quantite: 0, prix: 2.5 },
-    ];
-
-    const initialPlatsCaisse2 = [
-        { id: 1, nom: "Bún bò", quantite: 0, prix: 12 },
-        { id: 8, nom: "Bún bò", quantite: 0, prix: 11 },
-        { id: 2, nom: "Nouilles poulet", quantite: 0, prix: 5.5 },
-        { id: 3, nom: "Samoussa légumes", quantite: 0, prix: 5.5 },
-        { id: 4, nom: "Bánh mì", quantite: 0, prix: 5.0 },
-        { id: 9, nom: "chips", quantite: 0, prix: 1.0 },
-        { id: 5, nom: "Gaufre Choco / Cara", quantite: 0, prix: 3.5 },
-        { id: 6, nom: "Gaufre Sucre", quantite: 0, prix: 2.5 },
-        { id: 7, nom: "Fruits", quantite: 0, prix: 2.5 },
+    const initialPlats = [
+        { id: 1, nom: "bánh mì", quantite: 0, prix: 6.0 },
+        { id: 2, nom: "nems poulet", quantite: 0, prix: 5.5 },
+        { id: 3, nom: "samoussa légumes", quantite: 0, prix: 5.5 },
+        { id: 4, nom: "bún bò", quantite: 0, prix: 12 },
+        { id: 5, nom: "bún bò + Nems", quantite: 0, prix: 13.5 },
+        { id: 6, nom: "nouilles poulet", quantite: 0, prix: 11 },
+        { id: 7, nom: "chips", quantite: 0, prix: 1.0 },
+        { id: 8, nom: "fruits", quantite: 0, prix: 2.5 },
+        { id: 9, nom: "gaufre sucre", quantite: 0, prix: 2.5 },
+        { id: 10, nom: "gaufre choco / cara", quantite: 0, prix: 3.5 },
     ];
 
     const [platsCaisse1, setPlatsCaisse1] = useState(() => {
         const storedPlats = JSON.parse(localStorage.getItem("platsCaisse1"));
-        return storedPlats || initialPlatsCaisse1;
+        return storedPlats || initialPlats;
     });
 
     const [platsCaisse2, setPlatsCaisse2] = useState(() => {
         const storedPlats = JSON.parse(localStorage.getItem("platsCaisse2"));
-        return storedPlats || initialPlatsCaisse2;
+        return storedPlats || initialPlats;
     });
 
-    useEffect(() => {
-        localStorage.setItem("platsCaisse1", JSON.stringify(platsCaisse1));
-        localStorage.setItem("platsCaisse2", JSON.stringify(platsCaisse2));
-    }, [platsCaisse1, platsCaisse2]);
-
     const handleIncrement = (caisse, plat) => {
+        const newPlats = [
+            ...(caisse === "platsCaisse1" ? platsCaisse1 : platsCaisse2),
+        ];
+        const index = newPlats.indexOf(plat);
+        newPlats[index] = { ...plat };
+        newPlats[index].quantite++;
         if (caisse === "platsCaisse1") {
-            const newPlats = [...platsCaisse1];
-            const index = newPlats.indexOf(plat);
-            newPlats[index] = { ...plat };
-            newPlats[index].quantite++;
             setPlatsCaisse1(newPlats);
             localStorage.setItem("platsCaisse1", JSON.stringify(newPlats));
         } else if (caisse === "platsCaisse2") {
-            const newPlats = [...platsCaisse2];
-            const index = newPlats.indexOf(plat);
-            newPlats[index] = { ...plat };
-            newPlats[index].quantite++;
             setPlatsCaisse2(newPlats);
             localStorage.setItem("platsCaisse2", JSON.stringify(newPlats));
         }
     };
 
     const handleDecrement = (caisse, plat) => {
+        if (plat.quantite === 0) return;
+        const newPlats = [
+            ...(caisse === "platsCaisse1" ? platsCaisse1 : platsCaisse2),
+        ];
+        const index = newPlats.indexOf(plat);
+        newPlats[index] = { ...plat };
+        newPlats[index].quantite--;
         if (caisse === "platsCaisse1") {
-            if (plat.quantite === 0) return;
-            const newPlats = [...platsCaisse1];
-            const index = newPlats.indexOf(plat);
-            newPlats[index] = { ...plat };
-            newPlats[index].quantite--;
             setPlatsCaisse1(newPlats);
             localStorage.setItem("platsCaisse1", JSON.stringify(newPlats));
         } else if (caisse === "platsCaisse2") {
-            if (plat.quantite === 0) return;
-            const newPlats = [...platsCaisse2];
-            const index = newPlats.indexOf(plat);
-            newPlats[index] = { ...plat };
-            newPlats[index].quantite--;
             setPlatsCaisse2(newPlats);
             localStorage.setItem("platsCaisse2", JSON.stringify(newPlats));
         }
     };
+
+    const allPlats = [...platsCaisse1, ...platsCaisse2];
 
     const getTotalCount = (plats) => {
         const totals = {};
@@ -92,19 +73,13 @@ function VendangesPage() {
         return totals;
     };
 
-    const totalCombined = getTotalCount([...platsCaisse1, ...platsCaisse2]);
+    const totalCombined = getTotalCount(allPlats);
 
     const reset = () => {
-        setPlatsCaisse1(initialPlatsCaisse1);
-        setPlatsCaisse2(initialPlatsCaisse2);
-        localStorage.setItem(
-            "platsCaisse1",
-            JSON.stringify(initialPlatsCaisse1)
-        );
-        localStorage.setItem(
-            "platsCaisse2",
-            JSON.stringify(initialPlatsCaisse2)
-        );
+        setPlatsCaisse1(initialPlats);
+        setPlatsCaisse2(initialPlats);
+        localStorage.setItem("platsCaisse1", JSON.stringify(initialPlats));
+        localStorage.setItem("platsCaisse2", JSON.stringify(initialPlats));
     };
 
     const resetConfirmation = () => {
@@ -130,7 +105,7 @@ function VendangesPage() {
                                 navigate("/");
                             }}
                         >
-                            <FontAwesomeIcon icon={faArrowLeft} />
+                            <Icon icon={faArrowLeft} />
                         </button>
                         <h2 className="column-title">Caisse Nº1</h2>
                         <div className="dishes-container">
@@ -178,12 +153,9 @@ function VendangesPage() {
                                 </thead>
                                 <tbody>
                                     {Object.keys(totalCombined).map((id) => {
-                                        const plat = platsCaisse1
-                                            .concat(platsCaisse2)
-                                            .find(
-                                                (plat) =>
-                                                    plat.id === parseInt(id)
-                                            );
+                                        const plat = allPlats.find(
+                                            (plat) => plat.id === parseInt(id)
+                                        );
                                         return (
                                             <tr key={id}>
                                                 <td>{plat.nom}</td>
@@ -204,8 +176,7 @@ function VendangesPage() {
                             <h2 className="column-title">Les revenus</h2>
                             <span className="total-revenue">
                                 <b>
-                                    {platsCaisse1
-                                        .concat(platsCaisse2)
+                                    {allPlats
                                         .reduce(
                                             (acc, plat) =>
                                                 acc + plat.quantite * plat.prix,

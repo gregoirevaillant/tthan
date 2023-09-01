@@ -9,6 +9,7 @@ function DishCard(props) {
                 <span className="dish-name">
                     {plat.nom} - {plat.prix} €
                 </span>
+                <span>&emsp;</span>
                 <span className="dish-quantity">{plat.quantite}</span>
             </div>
             <div className="button-wrapper">
