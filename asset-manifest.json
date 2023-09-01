@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/tthan/static/css/main.439d29d0.css",
-    "main.js": "/tthan/static/js/main.8ed8140c.js",
+    "main.js": "/tthan/static/js/main.b541db99.js",
     "index.html": "/tthan/index.html",
     "main.439d29d0.css.map": "/tthan/static/css/main.439d29d0.css.map",
-    "main.8ed8140c.js.map": "/tthan/static/js/main.8ed8140c.js.map"
+    "main.b541db99.js.map": "/tthan/static/js/main.b541db99.js.map"
   },
   "entrypoints": [
     "static/css/main.439d29d0.css",
-    "static/js/main.8ed8140c.js"
+    "static/js/main.b541db99.js"
   ]
 }
