@@ -12,7 +12,7 @@ function VendangesPage() {
         { id: 2, nom: "nems poulet", quantite: 0, prix: 5.5 },
         { id: 3, nom: "samoussa légumes", quantite: 0, prix: 5.5 },
         { id: 4, nom: "bún bò", quantite: 0, prix: 12 },
-        { id: 5, nom: "bún bò + Nems", quantite: 0, prix: 13.5 },
+        { id: 5, nom: "bún bò + nems", quantite: 0, prix: 13.5 },
         { id: 6, nom: "nouilles poulet", quantite: 0, prix: 11 },
         { id: 7, nom: "chips", quantite: 0, prix: 1.0 },
         { id: 8, nom: "fruits", quantite: 0, prix: 2.5 },
