@@ -20,7 +20,7 @@ const Aliment = ({ aliments, onAlimentSelect }) => {
               key={index}
               // className={`aliment-item ${aliment.price === 0 ? "hidden" : ""}`}
               className={styles['aliment-item']}
-              style={{opacity: styleValue(aliment.price)}}
+              style={{opacity: styleValue(aliment.price), pointerEvents: "none"}}
               onClick={() => handleAlimentSelect(aliment)}
             >
               <div>

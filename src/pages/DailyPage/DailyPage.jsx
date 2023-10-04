@@ -142,13 +142,6 @@ function DailyPage() {
                     </div>
                     <div className="summary-container">
                         <h2>Daily Summary:</h2>
-                        {/* <div className="summary-products">
-                            {orderSummary.map((aliment, index) => (
-                                <div key={index} className="summary-product">
-                                    {aliment.name} x{aliment.count}
-                                </div>
-                            ))}
-                        </div> */}
                         <table className="summary-table">
                             <thead className="summary-table-head">
                                 <tr className="summary-table-row">
