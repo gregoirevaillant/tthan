@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import VendangePage from "./pages/VendangesPage/VendangesPage";
 import DailyPage from "./pages/DailyPage/DailyPage";
-import EventsPage from "./pages/EventsPage/EventsPage";
+import EventPage from "./pages/EventsPage/EventPage";
 
 import App from "./Home.jsx";
 
@@ -16,7 +16,7 @@ root.render(
             <Route path="/" element={<App />} />
             <Route path="/vendanges" element={<VendangePage />} />
             <Route path="/daily" element={<DailyPage />} />
-            <Route exact path="/events" element={<EventsPage />} />
+            <Route exact path="/event" element={<EventPage />} />
         </Routes>
     </HashRouter>
 );

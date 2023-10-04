@@ -1,0 +1,77 @@
+[
+    {
+        "id": "b8c03494",
+        "name": "Plat du jour",
+        "price": 10
+    },
+    {
+        "id": "b8c02cd8",
+        "name": "Bun Bo",
+        "price": 11
+    },
+    {
+        "id": "b8c0307a",
+        "name": "Banh mi",
+        "price": 5
+    },
+    {
+        "id": "b8c03250",
+        "name": "Goi cuon",
+        "price": 5
+    },
+    {
+        "id": "b8c03692",
+        "name": "Soupe",
+        "price": 11
+    },
+    {
+        "id": "b8c04434",
+        "name": "Eau",
+        "price": 1.5
+    },
+    {
+        "id": "b8c03d36",
+        "name": "Soft",
+        "price": 2
+    },
+    {
+        "id": "b8c046be",
+        "name": "Coco",
+        "price": 2.5
+    },
+    {
+        "id": "b8c04880",
+        "name": "Biere",
+        "price": 3.5
+    },
+    {
+        "id": "b8c04a3c",
+        "name": "0",
+        "price": 0
+    },
+    {
+        "id": "b8c04d94",
+        "name": "Fruits",
+        "price": 2
+    },
+    {
+        "id": "b8c05776",
+        "name": "Crumble",
+        "price": 3
+    },
+    {
+        "id": "b8c04c18",
+        "name": "Coeur matcha",
+        "price": 3
+    },
+    {
+        "id": "b8c05118",
+        "name": "Tapioca",
+        "price": 3.5
+    },
+    {
+        "id": "b8c04a323",
+        "name": "0",
+        "price": 0
+    }
+]
