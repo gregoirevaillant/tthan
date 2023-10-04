@@ -44,7 +44,7 @@ function EventPage() {
     return (
       <li ref={(node) => ref(drop(node))} key={item.id} className={styles['menu-item']}>
         {item.name} - {item.price}€{' '}
-        <button onClick={() => removeItem(item.id)}>Remove</button>
+        <button onClick={() => removeItem(item.id)} className={styles['ticket-button']}>Supprimer</button>
       </li>
     );
   };
@@ -110,7 +110,7 @@ function EventPage() {
     setSelectedAliments((prev) => {
       return [...prev, { ...aliment, count: 1, id: Date.now() }];
     });
-    setTotal((prev) => prev + aliment.price);
+    setTotal((prev) => prev + parseFloat(aliment.price));
   };
 
   const handleAlimentDeselect = (alimentId) => {
@@ -204,7 +204,7 @@ function EventPage() {
                 />
               </div>
               <div className={styles['summary-container']}>
-                <h2>Daily Summary:</h2>
+                <h2>Résumé de l'événement:</h2>
                 <table className={styles['summary-table']}>
                   <thead>
                     <tr>
@@ -262,6 +262,7 @@ function EventPage() {
                   Terminer le service
                 </button>
               </div>
+              <h2>Modification du menu :</h2>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();

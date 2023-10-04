@@ -51,6 +51,7 @@
   border-radius: 10px;
   border: 2px solid #ccc;
   font-size: 1.3rem;
+  cursor: pointer;
 }
 
 .aliment-item-0 {
@@ -155,6 +156,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .summary-button {
@@ -210,6 +212,11 @@
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #0c203420;
 }
 
 .menu-item:last-child {
