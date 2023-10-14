@@ -15,6 +15,7 @@ function DailyPage() {
     const [orderSummary, setOrderSummary] = useState([]);
     const [allOrders, setAllOrders] = useState({});
     const [dayStarted, setDayStarted] = useState(false);
+    const [dailyTotal, setDailyTotal] = useState(0);
 
     const handleStartDay = () => {
         localStorage.setItem("dayStarted", true);
@@ -28,6 +29,8 @@ function DailyPage() {
         if (confirmEndDay) {
             localStorage.removeItem("dayStarted");
             localStorage.removeItem("dailySummary");
+            localStorage.removeItem("dailyTotal");
+            setDailyTotal(0)
             setOrderSummary([]);
             setAllOrders({});
             setDayStarted(false);
@@ -36,6 +39,10 @@ function DailyPage() {
 
     useEffect(() => {
         const storedSummary = localStorage.getItem("dailySummary");
+        const storedDailyTotal = localStorage.getItem("dailyTotal");
+        if (storedDailyTotal) {
+            setDailyTotal(parseFloat(storedDailyTotal));
+        }
         if (storedSummary) {
             const parsedSummary = JSON.parse(storedSummary);
             setOrderSummary(parsedSummary);
@@ -90,6 +97,12 @@ function DailyPage() {
             "dailySummary",
             JSON.stringify(Object.values(updatedOrderSummary))
         );
+        const updatedDailyTotal = dailyTotal + total;
+        localStorage.setItem(
+            "dailyTotal",
+            updatedDailyTotal
+        );
+        setDailyTotal(updatedDailyTotal);
 
         setSelectedAliments([]);
         setTotal(0);
@@ -166,13 +179,13 @@ function DailyPage() {
                                             style={
                                                 index % 2 === 0
                                                     ? {
-                                                          backgroundColor:
-                                                              "#f2f2f2",
-                                                      }
+                                                        backgroundColor:
+                                                            "#f2f2f2",
+                                                    }
                                                     : {
-                                                          backgroundColor:
-                                                              "#fff",
-                                                      }
+                                                        backgroundColor:
+                                                            "#fff",
+                                                    }
                                             }
                                         >
                                             <td className="summary-table-data">
@@ -186,6 +199,13 @@ function DailyPage() {
                                             </td>
                                         </tr>
                                     ))}
+                                <tr className="summary-table-row">
+                                    <td className="summary-table-data"><b>Total quotidien</b></td>
+                                    <td className="summary-table-data"></td>
+                                    <td className="summary-table-data">
+                                        {dailyTotal} €
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
