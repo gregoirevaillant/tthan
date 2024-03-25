@@ -19,7 +19,6 @@
   margin: 1rem;
   cursor: pointer;
   align-self: start;
-
 }
 
 .button {
@@ -57,10 +56,6 @@
 .aliment-item-0 {
   opacity: 0;
   pointer-events: none;
-}
-
-.aliment-item:hover {
-  background-color: #ccc;
 }
 
 .ticket {
@@ -169,7 +164,6 @@
   font-weight: bold;
   cursor: pointer;
 }
-
 
 .form-container {
   margin-top: 20px;
