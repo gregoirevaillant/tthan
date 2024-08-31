@@ -1,0 +1,86 @@
+[
+  {
+    "id": "b8c03023",
+    "category": "plat",
+    "name": "Banh mi",
+    "price": 6,
+    "color": "#FFFFFF"
+  },
+  {
+    "id": "b8c030as",
+    "category": "plat",
+    "name": "Nems",
+    "price": 5,
+    "color": "#FFD700"
+  },
+  {
+    "id": "b8c0307a",
+    "category": "plat",
+    "name": "Samosa",
+    "price": 5,
+    "color": "#FF6347"
+  },
+  {
+    "id": "0",
+    "category": "0",
+    "name": "0",
+    "price": 0,
+    "color": "#FFD700"
+  },
+  {
+    "id": "b8c03250",
+    "category": "plat",
+    "name": "Bun",
+    "price": 12,
+    "color": "#87CEFA"
+  },
+  {
+    "id": "b8c03494",
+    "category": "plat",
+    "name": "Bun + Nems",
+    "price": 14,
+    "color": "#98FB98"
+  },
+  {
+    "id": "b8c02cd8",
+    "category": "plat",
+    "name": "Porc",
+    "price": 12,
+    "color": "#FFC0CB"
+  },
+  {
+    "id": "0",
+    "category": "0",
+    "name": "0",
+    "price": 0,
+    "color": "#FFD700"
+  },
+  {
+    "id": "b8c04434",
+    "category": "dessert",
+    "name": "Fruits",
+    "price": 2.5,
+    "color": "#FF4500"
+  },
+  {
+    "id": "b8c05776",
+    "category": "dessert",
+    "name": "Gaufre Sucre",
+    "price": 3,
+    "color": "#ADD8E6"
+  },
+  {
+    "id": "b8c04c18",
+    "category": "dessert",
+    "name": "Gaufre C/C",
+    "price": 3.5,
+    "color": "#8B4513"
+  },
+  {
+    "id": "b8c05118",
+    "category": "dessert",
+    "name": "Tapioca",
+    "price": 3.5,
+    "color": "#D2B48C"
+  }
+]

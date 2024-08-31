@@ -1,210 +1,198 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faChevronDown,
+  faChevronUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Papa from "papaparse";
 
-import DishCard from "../../components/DishCard";
-import "./VendangesPage.css";
+import data from "./data.json";
+import Aliment from "./Aliment";
+import Ticket from "./Ticket";
+import styles from "./VendangesPage.module.css";
 
 function VendangesPage() {
-    const initialPlats = [
-        { id: 1, nom: "bánh mì", quantite: 0, prix: 6.0 },
-        { id: 2, nom: "nems poulet", quantite: 0, prix: 5.5 },
-        { id: 3, nom: "samoussa légumes", quantite: 0, prix: 5.5 },
-        { id: 4, nom: "bún bò", quantite: 0, prix: 12 },
-        { id: 5, nom: "bún bò + nems", quantite: 0, prix: 13.5 },
-        { id: 6, nom: "nouilles poulet", quantite: 0, prix: 11 },
-        { id: 7, nom: "chips", quantite: 0, prix: 1.0 },
-        { id: 8, nom: "fruits", quantite: 0, prix: 2.5 },
-        { id: 9, nom: "gaufre sucre", quantite: 0, prix: 2.5 },
-        { id: 10, nom: "gaufre choco / cara", quantite: 0, prix: 3.5 },
-    ];
+  const [selectedAliments, setSelectedAliments] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [orderSummary, setOrderSummary] = useState([]);
+  const [allOrders, setAllOrders] = useState({});
+  const [dailyTotal, setDailyTotal] = useState(0);
+  const [isAccordionOpen, setAccordionOpen] = useState(false);
 
-    const [platsCaisse1, setPlatsCaisse1] = useState(() => {
-        const storedPlats = JSON.parse(localStorage.getItem("platsCaisse1"));
-        return storedPlats || initialPlats;
+  useEffect(() => {
+    const storedSummary = localStorage.getItem("dailySummary");
+    const storedDailyTotal = localStorage.getItem("dailyTotal");
+    if (storedDailyTotal) {
+      setDailyTotal(parseFloat(storedDailyTotal));
+    }
+    if (storedSummary) {
+      const parsedSummary = JSON.parse(storedSummary);
+      setOrderSummary(parsedSummary);
+      setAllOrders(
+        parsedSummary.reduce((acc, aliment) => {
+          acc[aliment.name] = { ...aliment };
+          return acc;
+        }, {})
+      );
+    }
+  }, []);
+
+  const handleAlimentSelect = (aliment) => {
+    setSelectedAliments((prev) => {
+      return [...prev, { ...aliment, count: 1, id: Date.now() }];
     });
+    setTotal((prev) => prev + aliment.price);
+  };
 
-    const [platsCaisse2, setPlatsCaisse2] = useState(() => {
-        const storedPlats = JSON.parse(localStorage.getItem("platsCaisse2"));
-        return storedPlats || initialPlats;
-    });
-
-    const handleIncrement = (caisse, plat) => {
-        const newPlats = [
-            ...(caisse === "platsCaisse1" ? platsCaisse1 : platsCaisse2),
-        ];
-        const index = newPlats.indexOf(plat);
-        newPlats[index] = { ...plat };
-        newPlats[index].quantite++;
-        if (caisse === "platsCaisse1") {
-            setPlatsCaisse1(newPlats);
-            localStorage.setItem("platsCaisse1", JSON.stringify(newPlats));
-        } else if (caisse === "platsCaisse2") {
-            setPlatsCaisse2(newPlats);
-            localStorage.setItem("platsCaisse2", JSON.stringify(newPlats));
-        }
-    };
-
-    const handleDecrement = (caisse, plat) => {
-        if (plat.quantite === 0) return;
-        const newPlats = [
-            ...(caisse === "platsCaisse1" ? platsCaisse1 : platsCaisse2),
-        ];
-        const index = newPlats.indexOf(plat);
-        newPlats[index] = { ...plat };
-        newPlats[index].quantite--;
-        if (caisse === "platsCaisse1") {
-            setPlatsCaisse1(newPlats);
-            localStorage.setItem("platsCaisse1", JSON.stringify(newPlats));
-        } else if (caisse === "platsCaisse2") {
-            setPlatsCaisse2(newPlats);
-            localStorage.setItem("platsCaisse2", JSON.stringify(newPlats));
-        }
-    };
-
-    const allPlats = [...platsCaisse1, ...platsCaisse2];
-
-    const getTotalCount = (plats) => {
-        const totals = {};
-        plats.forEach((plat) => {
-            totals[plat.id] = (totals[plat.id] || 0) + plat.quantite;
-        });
-        return totals;
-    };
-
-    const totalCombined = getTotalCount(allPlats);
-
-    const reset = () => {
-        setPlatsCaisse1(initialPlats);
-        setPlatsCaisse2(initialPlats);
-        localStorage.setItem("platsCaisse1", JSON.stringify(initialPlats));
-        localStorage.setItem("platsCaisse2", JSON.stringify(initialPlats));
-    };
-
-    const resetConfirmation = () => {
-        if (
-            window.confirm(
-                "Êtes-vous sûr de vouloir réinitialiser les statistiques ?"
-            )
-        ) {
-            reset();
-        }
-    };
-
-    const navigate = useNavigate();
-
-    return (
-        <>
-            <div className="app">
-                <div className="app-wrapper">
-                    <div className="column" id="caisseOne">
-                        <button
-                            className="back-button"
-                            onClick={() => {
-                                navigate("/");
-                            }}
-                        >
-                            <Icon icon={faArrowLeft} />
-                        </button>
-                        <h2 className="column-title">Caisse Nº1</h2>
-                        <div className="dishes-container">
-                            {platsCaisse1.map((plat) => (
-                                <DishCard
-                                    key={plat.id}
-                                    plat={plat}
-                                    onIncrement={() =>
-                                        handleIncrement("platsCaisse1", plat)
-                                    }
-                                    onDecrement={() =>
-                                        handleDecrement("platsCaisse1", plat)
-                                    }
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div className="column" id="caisseTwo">
-                        <h2 className="column-title">Caisse Nº2</h2>
-                        <div className="dishes-container">
-                            {platsCaisse2.map((plat) => (
-                                <DishCard
-                                    key={plat.id}
-                                    plat={plat}
-                                    onIncrement={() =>
-                                        handleIncrement("platsCaisse2", plat)
-                                    }
-                                    onDecrement={() =>
-                                        handleDecrement("platsCaisse2", plat)
-                                    }
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div className="column" id="quantityTotal">
-                        <h2 className="column-title">Les statistiques</h2>
-                        <div className="quantity-table-wrapper">
-                            <table className="quantity-table">
-                                <thead>
-                                    <tr>
-                                        <th>Plat</th>
-                                        <th>Quantité</th>
-                                        <th>Prix Total (€)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(totalCombined).map((id) => {
-                                        const plat = allPlats.find(
-                                            (plat) => plat.id === parseInt(id)
-                                        );
-                                        return (
-                                            <tr key={id}>
-                                                <td>{plat.nom}</td>
-                                                <td>{totalCombined[id]}</td>
-                                                <td>
-                                                    {(
-                                                        totalCombined[id] *
-                                                        plat.prix
-                                                    ).toFixed(2)}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="total-revenue-wrapper">
-                            <h2 className="column-title">Les revenus</h2>
-                            <span className="total-revenue">
-                                <b>
-                                    {allPlats
-                                        .reduce(
-                                            (acc, plat) =>
-                                                acc + plat.quantite * plat.prix,
-                                            0
-                                        )
-                                        .toFixed(2)}
-                                </b>{" "}
-                                €
-                            </span>
-                        </div>
-                        <div className="reset-button-wrapper">
-                            <h2 className="column-title">
-                                Réinitialiser les statistiques
-                            </h2>
-                            <button
-                                className="button primary"
-                                onClick={() => {
-                                    resetConfirmation();
-                                }}
-                            >
-                                Réinitialiser
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
+  const handleAlimentDeselect = (alimentId) => {
+    const deselectedAliment = selectedAliments.find(
+      (item) => item.id === alimentId
     );
+
+    setSelectedAliments((prev) => prev.filter((item) => item.id !== alimentId));
+    setTotal((prevTotal) => prevTotal - deselectedAliment.price);
+  };
+
+  const handlePlaceInSummary = () => {
+    const updatedOrderSummary = selectedAliments.reduce(
+      (acc, aliment) => {
+        if (acc[aliment.name]) {
+          acc[aliment.name].count += aliment.count;
+        } else {
+          acc[aliment.name] = { ...aliment };
+        }
+        return acc;
+      },
+      { ...allOrders }
+    );
+
+    setOrderSummary(Object.values(updatedOrderSummary));
+    setAllOrders(updatedOrderSummary);
+    localStorage.setItem(
+      "dailySummary",
+      JSON.stringify(Object.values(updatedOrderSummary))
+    );
+    const updatedDailyTotal = dailyTotal + total;
+    localStorage.setItem("dailyTotal", updatedDailyTotal);
+    setDailyTotal(updatedDailyTotal);
+
+    setSelectedAliments([]);
+    setTotal(0);
+  };
+
+  const handleExportSummaryCSV = () => {
+    const csv = Papa.unparse(orderSummary);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute(
+      "download",
+      `daily-summary-${new Date().toLocaleDateString()}.csv`
+    );
+    link.click();
+  };
+
+  const navigate = useNavigate();
+
+  return (
+    <div className={styles["vendanges-container"]}>
+      <button
+        className={styles["back-button"]}
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
+      <div className={styles["container"]}>
+        <div>
+          <Aliment aliments={data} onAlimentSelect={handleAlimentSelect} />
+          <Ticket
+            selectedAliments={selectedAliments}
+            total={total}
+            onAlimentRemove={handleAlimentDeselect}
+            onPlaceInSummary={handlePlaceInSummary}
+          />
+        </div>
+        <div className={styles["summary-container"]}>
+          <button
+            className={styles["accordion-header"]}
+            onClick={() => setAccordionOpen((prev) => !prev)}
+          >
+            <span>Daily Summary:</span>
+            <FontAwesomeIcon
+              icon={isAccordionOpen ? faChevronUp : faChevronDown}
+              className={`${styles["accordion-toggle"]} ${
+                isAccordionOpen ? styles["open"] : ""
+              }`}
+            />
+          </button>
+          {isAccordionOpen && (
+            <div className={styles["accordion-content"]}>
+              <table className={styles["summary-table"]}>
+                <thead className={styles["summary-table-head"]}>
+                  <tr className={styles["summary-table-row"]}>
+                    <th className={styles["summary-table-header"]}>Plat</th>
+                    <th className={styles["summary-table-header"]}>Quantité</th>
+                    <th className={styles["summary-table-header"]}>
+                      Prix Total (€)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className={styles["summary-table-body"]}>
+                  {orderSummary
+                    .sort((a, b) => b.count - a.count)
+                    .map((aliment, index) => (
+                      <tr
+                        className={styles["summary-table-row"]}
+                        key={index}
+                        style={
+                          index % 2 === 0
+                            ? { backgroundColor: "#f2f2f2" }
+                            : { backgroundColor: "#fff" }
+                        }
+                      >
+                        <td className={styles["summary-table-data"]}>
+                          {aliment.name}
+                        </td>
+                        <td className={styles["summary-table-data"]}>
+                          {aliment.count}
+                        </td>
+                        <td className={styles["summary-table-data"]}>
+                          {aliment.price * aliment.count}
+                        </td>
+                      </tr>
+                    ))}
+                  <tr className={styles["summary-table-row"]}>
+                    <td className={styles["summary-table-data"]}>
+                      <b>Total quotidien</b>
+                    </td>
+                    <td className={styles["summary-table-data"]}></td>
+                    <td className={styles["summary-table-data"]}>
+                      {dailyTotal} €
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className={styles["summary-buttons"]}>
+                {orderSummary.length > 0 && (
+                  <button
+                    className={styles["summary-button"]}
+                    onClick={handleExportSummaryCSV}
+                  >
+                    Télécharger le résumé (CSV)
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default VendangesPage;

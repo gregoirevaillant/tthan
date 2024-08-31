@@ -1,6 +1,6 @@
 .daily-container {
     margin: 0;
-    padding-top: 4rem;
+    padding: 4rem 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -14,6 +14,25 @@
     font-size: 2rem;
     font-weight: bold;
     margin: 1rem 0;
+}
+
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.button {
+    margin: 0 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #0c2034;
+    font-weight: bold;
 }
 
 .aliments-grid {
