@@ -36,6 +36,18 @@
     "price": 11
   },
   {
+    "id": "b8c04abc",
+    "category": "plat",
+    "name": "Jour VG",
+    "price": 11
+  },
+  {
+    "id": "b8c04idh",
+    "category": "plat",
+    "name": "Jour Viet",
+    "price": 5
+  },
+  {
     "id": "b8c02cd8",
     "category": "plat",
     "name": "Bun Bo",
@@ -46,18 +58,6 @@
     "category": "plat",
     "name": "Soupe",
     "price": 12
-  },
-  {
-    "id": "b8c04aac",
-    "category": "0",
-    "name": "0",
-    "price": 0
-  },
-  {
-    "id": "b8c04aov",
-    "category": "0",
-    "name": "0",
-    "price": 0
   },
   {
     "id": "b8c04434",
