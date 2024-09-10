@@ -33,7 +33,7 @@
     "id": "b8c03494",
     "category": "plat",
     "name": "Plat du jour",
-    "price": 10
+    "price": 11
   },
   {
     "id": "b8c02cd8",
@@ -45,7 +45,7 @@
     "id": "b8c03692",
     "category": "plat",
     "name": "Soupe",
-    "price": 11
+    "price": 12
   },
   {
     "id": "b8c04aac",
@@ -87,7 +87,7 @@
     "id": "b8c04880",
     "category": "boisson",
     "name": "Bière",
-    "price": 3.5
+    "price": 4
   },
   {
     "id": "b8c04d94",
