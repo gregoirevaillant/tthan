@@ -3,25 +3,25 @@
     "id": "b8c03023",
     "category": "plat",
     "name": "Banh mi",
-    "price": 5
+    "price": 6
   },
   {
     "id": "b8c030as",
     "category": "plat",
     "name": "Banh mi VG",
-    "price": 5
+    "price": 6
   },
   {
     "id": "b8c0307a",
     "category": "plat",
-    "name": "1/2 Banh mi",
+    "name": "Banh mi Viet",
     "price": 3
   },
   {
     "id": "b8c03250",
     "category": "plat",
     "name": "Goi cuon",
-    "price": 5
+    "price": 6
   },
   {
     "id": "b8c04a3c",
@@ -81,7 +81,7 @@
     "id": "b8c046b3",
     "category": "boisson",
     "name": "JOMO",
-    "price": 2.5
+    "price": 3
   },
   {
     "id": "b8c04880",
@@ -114,9 +114,9 @@
     "price": 3.5
   },
   {
-    "id": "b8c04a323",
-    "category": "0",
-    "name": "0",
-    "price": 0
+    "id": "b8c05108",
+    "category": "autre",
+    "name": "Couverts",
+    "price": 1
   }
 ]
