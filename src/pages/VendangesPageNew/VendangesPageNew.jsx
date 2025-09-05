@@ -19,16 +19,26 @@ function VendangesPageNew() {
         { id: 10, name: "Gaufre choco / cara", quantity: 0, price: 3.5 },
     ];
 
-    const [menuItems, setMenuItems] = useState(() => {
-        const stored = JSON.parse(localStorage.getItem("menuItems"));
-        return stored || initialMenuItems;
-    });
-
     const [currentOrder, setCurrentOrder] = useState([]);
-
     const [orderCount, setOrderCount] = useState(() => {
         return parseInt(localStorage.getItem("orderCount")) || 0;
     });
+    const [menuItems, setMenuItems] = useState(() => {
+        try {
+            const stored = localStorage.getItem("menuItems");
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            }
+        } catch (e) {
+            console.warn("Invalid menuItems in localStorage, resetting.", e);
+        }
+        return initialMenuItems;
+    });
+
+
 
     const handleAddItem = (item) => {
         const updatedOrder = [...currentOrder];
@@ -43,9 +53,7 @@ function VendangesPageNew() {
 
     const handleRemoveFromOrder = (id) => {
         const updatedOrder = currentOrder
-            .map((o) =>
-                o.id === id ? { ...o, quantity: o.quantity - 1 } : o
-            )
+            .map((o) => (o.id === id ? { ...o, quantity: o.quantity - 1 } : o))
             .filter((o) => o.quantity > 0);
         setCurrentOrder(updatedOrder);
     };
@@ -120,15 +128,12 @@ function VendangesPageNew() {
                             <p>Aucun article</p>
                         ) : (
                             currentOrder.map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={styles.orderItem}
-                                >
+                                <div key={item.id} className={styles.orderItem}>
                                     <span>
                                         {item.name} x {item.quantity}
                                     </span>
                                     <button
-                                    className={styles.removeBtn}
+                                        className={styles.removeBtn}
                                         onClick={() =>
                                             handleRemoveFromOrder(item.id)
                                         }
@@ -197,11 +202,18 @@ function VendangesPageNew() {
                         </b>{" "}
                         €
                     </h2>
-                    <h3>Nombre de commandes: <b>{orderCount}</b></h3>
+                    <h3>
+                        Nombre de commandes: <b>{orderCount}</b>
+                    </h3>
                 </div>
 
                 <div className={styles.resetWrapper}>
-                    <button className={styles.resetButton} onClick={resetConfirmation}>Réinitialiser</button>
+                    <button
+                        className={styles.resetButton}
+                        onClick={resetConfirmation}
+                    >
+                        Réinitialiser
+                    </button>
                 </div>
             </div>
         </div>
