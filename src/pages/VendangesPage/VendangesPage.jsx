@@ -8,14 +8,14 @@ import "./VendangesPage.css";
 
 function VendangesPage() {
     const initialPlats = [
-        { id: 1, nom: "bánh mì", quantite: 0, prix: 6.0 },
-        { id: 2, nom: "nems poulet", quantite: 0, prix: 5.5 },
-        { id: 3, nom: "samoussa légumes", quantite: 0, prix: 5.5 },
-        { id: 4, nom: "bún bò", quantite: 0, prix: 12 },
-        { id: 5, nom: "bún bò + nems", quantite: 0, prix: 13.5 },
-        { id: 6, nom: "nouilles poulet", quantite: 0, prix: 11 },
-        { id: 7, nom: "chips", quantite: 0, prix: 1.0 },
+        { id: 1, nom: "bánh mì", quantite: 0, prix: 7.0 },
+        { id: 2, nom: "nems poulet", quantite: 0, prix: 5 },
+        { id: 3, nom: "samoussa légumes", quantite: 0, prix: 5 },
+        { id: 4, nom: "bún bò", quantite: 0, prix: 12.50 },
+        { id: 5, nom: "bún bò + nems", quantite: 0, prix: 14 },
+        { id: 6, nom: "wok nouilles", quantite: 0, prix: 11 },
         { id: 8, nom: "fruits", quantite: 0, prix: 2.5 },
+        { id: 8, nom: "tapioca", quantite: 0, prix: 3.5 },
         { id: 9, nom: "gaufre sucre", quantite: 0, prix: 2.5 },
         { id: 10, nom: "gaufre choco / cara", quantite: 0, prix: 3.5 },
     ];

@@ -19,6 +19,10 @@ function Home() {
                     destination="event"
                     children="Caisse des évènements"
                 />
+                <HomeButton
+                    destination="vendanges-new"
+                    children="Caisse des Vendanges New"
+                />
             </div>
         </div>
     );
