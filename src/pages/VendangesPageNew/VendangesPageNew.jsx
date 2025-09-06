@@ -7,12 +7,12 @@ import styles from "./VendangesPageNew.module.css";
 
 function VendangesPageNew() {
     const initialMenuItems = [
-        { id: 1, name: "Bánh mì", quantity: 0, price: 7.0 },
+        { id: 1, name: "Bánh mì", quantity: 0, price: 7 },
         { id: 2, name: "Nems poulet", quantity: 0, price: 5 },
         { id: 3, name: "Samoussa légumes", quantity: 0, price: 5 },
         { id: 4, name: "Bún bò", quantity: 0, price: 12.5 },
         { id: 5, name: "Bún bò + nems", quantity: 0, price: 14 },
-        { id: 6, name: "Wok nouilles", quantity: 0, price: 11 },
+        { id: 6, name: "Wok nouilles", quantity: 0, price: 12 },
         { id: 7, name: "Fruits", quantity: 0, price: 2.5 },
         { id: 8, name: "Tapioca", quantity: 0, price: 3.5 },
         { id: 9, name: "Gaufre sucre", quantity: 0, price: 2.5 },
