@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Papa from "papaparse";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import data from "./data.json";
 import Aliment from "./Aliment";
+import data from "./data.json";
 import Ticket from "./Ticket";
-import "./DailyPage.css";
+
+import styles from "./DailyPage.module.css";
 
 function DailyPage() {
     const [selectedAliments, setSelectedAliments] = useState([]);
@@ -16,6 +17,7 @@ function DailyPage() {
     const [allOrders, setAllOrders] = useState({});
     const [dayStarted, setDayStarted] = useState(false);
     const [dailyTotal, setDailyTotal] = useState(0);
+    const [dailyOrderCount, setDailyOrderCount] = useState(0);
 
     const handleStartDay = () => {
         localStorage.setItem("dayStarted", true);
@@ -30,7 +32,9 @@ function DailyPage() {
             localStorage.removeItem("dayStarted");
             localStorage.removeItem("dailySummary");
             localStorage.removeItem("dailyTotal");
-            setDailyTotal(0)
+            localStorage.removeItem("dailyOrderCount");
+            setDailyTotal(0);
+            setDailyOrderCount(0);
             setOrderSummary([]);
             setAllOrders({});
             setDayStarted(false);
@@ -40,9 +44,10 @@ function DailyPage() {
     useEffect(() => {
         const storedSummary = localStorage.getItem("dailySummary");
         const storedDailyTotal = localStorage.getItem("dailyTotal");
-        if (storedDailyTotal) {
-            setDailyTotal(parseFloat(storedDailyTotal));
-        }
+        const storedDailyOrderCount = localStorage.getItem("dailyOrderCount");
+        if (storedDailyTotal) setDailyTotal(parseFloat(storedDailyTotal));
+        if (storedDailyOrderCount)
+            setDailyOrderCount(parseFloat(storedDailyOrderCount));
         if (storedSummary) {
             const parsedSummary = JSON.parse(storedSummary);
             setOrderSummary(parsedSummary);
@@ -53,39 +58,34 @@ function DailyPage() {
                 }, {})
             );
         }
-        if (localStorage.getItem("dayStarted")) {
-            setDayStarted(true);
-        } else {
-            setDayStarted(false);
-        }
+        setDayStarted(!!localStorage.getItem("dayStarted"));
     }, []);
 
     const handleAlimentSelect = (aliment) => {
-        setSelectedAliments((prev) => {
-            return [...prev, { ...aliment, count: 1, id: Date.now() }];
-        });
+        setSelectedAliments((prev) => [
+            ...prev,
+            { ...aliment, count: 1, id: Date.now() },
+        ]);
         setTotal((prev) => prev + aliment.price);
     };
 
     const handleAlimentDeselect = (alimentId) => {
-        const deselectedAliment = selectedAliments.find(
+        const deselected = selectedAliments.find(
             (item) => item.id === alimentId
         );
-
         setSelectedAliments((prev) =>
             prev.filter((item) => item.id !== alimentId)
         );
-        setTotal((prevTotal) => prevTotal - deselectedAliment.price);
+        setTotal((prev) => prev - deselected.price);
     };
 
     const handlePlaceInSummary = () => {
+        if (selectedAliments.length === 0) return;
+
         const updatedOrderSummary = selectedAliments.reduce(
             (acc, aliment) => {
-                if (acc[aliment.name]) {
-                    acc[aliment.name].count += aliment.count;
-                } else {
-                    acc[aliment.name] = { ...aliment };
-                }
+                if (acc[aliment.name]) acc[aliment.name].count += aliment.count;
+                else acc[aliment.name] = { ...aliment };
                 return acc;
             },
             { ...allOrders }
@@ -98,12 +98,13 @@ function DailyPage() {
             JSON.stringify(Object.values(updatedOrderSummary))
         );
         const updatedDailyTotal = dailyTotal + total;
-        localStorage.setItem(
-            "dailyTotal",
-            updatedDailyTotal
-        );
+        localStorage.setItem("dailyTotal", updatedDailyTotal);
         setDailyTotal(updatedDailyTotal);
-
+        setDailyOrderCount((prev) => {
+            const newCount = prev + 1;
+            localStorage.setItem("dailyOrderCount", newCount);
+            return newCount;
+        });
         setSelectedAliments([]);
         setTotal(0);
     };
@@ -124,24 +125,21 @@ function DailyPage() {
     const navigate = useNavigate();
 
     return (
-        <div className="daily-container">
-            <button
-                className="back-button"
-                onClick={() => {
-                    navigate("/");
-                }}
-            >
+        <div className={styles.wrapper}>
+            <button className={styles.backButton} onClick={() => navigate("/")}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </button>
+
             {!dayStarted ? (
-                <div>
-                    <button className="button" onClick={handleStartDay}>
-                        Commencer le service
-                    </button>
-                </div>
+                <button
+                    className={styles.summaryButton}
+                    onClick={handleStartDay}
+                >
+                    Commencer le service
+                </button>
             ) : (
-                <div>
-                    <div>
+                <>
+                    <div className={styles.caisseWrapper}>
                         <Aliment
                             aliments={data}
                             onAlimentSelect={handleAlimentSelect}
@@ -153,76 +151,93 @@ function DailyPage() {
                             onPlaceInSummary={handlePlaceInSummary}
                         />
                     </div>
-                    <div className="summary-container">
-                        <h2>Daily Summary:</h2>
-                        <table className="summary-table">
-                            <thead className="summary-table-head">
-                                <tr className="summary-table-row">
-                                    <th className="summary-table-header">
+
+                    <div className={styles.summaryContainer}>
+                        <h2>{`Sommaire: ${dailyOrderCount} commande${
+                            dailyOrderCount > 1 ? "s" : ""
+                        }`}</h2>
+                        <table className={styles.summaryTable}>
+                            <thead className={styles.summaryTableHead}>
+                                <tr className={styles.summaryTableRow}>
+                                    <th className={styles.summaryTableHeader}>
                                         Plat
                                     </th>
-                                    <th className="summary-table-header">
+                                    <th className={styles.summaryTableHeader}>
                                         Quantité
                                     </th>
-                                    <th className="summary-table-header">
+                                    <th className={styles.summaryTableHeader}>
                                         Prix Total (€)
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="summary-table-body">
+                            <tbody className={styles.summaryTableBody}>
                                 {orderSummary
                                     .sort((a, b) => b.count - a.count)
-                                    .map((aliment, index) => (
+                                    .map((aliment, idx) => (
                                         <tr
-                                            className="summary-table-row"
-                                            key={index}
-                                            style={
-                                                index % 2 === 0
-                                                    ? {
-                                                        backgroundColor:
-                                                            "#f2f2f2",
-                                                    }
-                                                    : {
-                                                        backgroundColor:
-                                                            "#fff",
-                                                    }
-                                            }
+                                            key={idx}
+                                            className={styles.summaryTableRow}
+                                            style={{
+                                                backgroundColor:
+                                                    idx % 2 === 0
+                                                        ? "#f2f2f2"
+                                                        : "#fff",
+                                            }}
                                         >
-                                            <td className="summary-table-data">
+                                            <td
+                                                className={
+                                                    styles.summaryTableData
+                                                }
+                                            >
                                                 {aliment.name}
                                             </td>
-                                            <td className="summary-table-data">
+                                            <td
+                                                className={
+                                                    styles.summaryTableData
+                                                }
+                                            >
                                                 {aliment.count}
                                             </td>
-                                            <td className="summary-table-data">
+                                            <td
+                                                className={
+                                                    styles.summaryTableData
+                                                }
+                                            >
                                                 {aliment.price * aliment.count}
                                             </td>
                                         </tr>
                                     ))}
-                                <tr className="summary-table-row">
-                                    <td className="summary-table-data"><b>Total quotidien</b></td>
-                                    <td className="summary-table-data"></td>
-                                    <td className="summary-table-data">
+                                <tr className={styles.summaryTableRow}>
+                                    <td className={styles.summaryTableData}>
+                                        <b>Total quotidien</b>
+                                    </td>
+                                    <td
+                                        className={styles.summaryTableData}
+                                    ></td>
+                                    <td className={styles.summaryTableData}>
                                         {dailyTotal} €
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div className="summary-buttons">
-                        {orderSummary.length > 0 && (
+                        <div className={styles.summaryButtons}>
+                            {orderSummary.length > 0 && (
+                                <button
+                                    className={styles.summaryButton}
+                                    onClick={handleExportSummaryCSV}
+                                >
+                                    Télécharger le résumé (CSV)
+                                </button>
+                            )}
                             <button
-                                className="button"
-                                onClick={handleExportSummaryCSV}
+                                className={styles.summaryButton}
+                                onClick={handleEndDay}
                             >
-                                Télécharger le résumé (CSV)
+                                Terminer le service
                             </button>
-                        )}
-                        <button className="button" onClick={handleEndDay}>
-                            Terminer le service
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </>
             )}
         </div>
     );

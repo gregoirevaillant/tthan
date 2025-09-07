@@ -1,30 +1,34 @@
-.daily-container {
+.wrapper {
     margin: 0;
     padding-top: 4rem;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     background-color: #f5f5f5;
-    min-height: 100vh;
     position: relative;
 }
 
-.daily-title {
+.caisseWrapper {
+    min-height: 100vh;
+}
+
+.dailyTitle {
     font-size: 2rem;
     font-weight: bold;
     margin: 1rem 0;
 }
 
-.aliments-grid {
+.alimentsGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-gap: 10px;
+    gap: 10px;
     row-gap: 20px;
 }
 
-.aliment-item {
+.alimentItem {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,14 +37,15 @@
     border-radius: 10px;
     border: 2px solid #ccc;
     font-size: 1.3rem;
+    cursor: pointer;
 }
 
-.aliment-item-0 {
+.alimentItemDisabled {
     opacity: 0;
     pointer-events: none;
 }
 
-.aliment-item:hover {
+.alimentItemHover:hover {
     background-color: #ccc;
 }
 
@@ -52,14 +57,14 @@
     margin-top: 20px;
 }
 
-.ticket-header {
+.ticketHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.ticket-button {
+.ticketButton {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid #0c2034;
@@ -70,12 +75,12 @@
     cursor: pointer;
 }
 
-.ticket-list {
+.ticketList {
     list-style: none;
     padding: 0;
 }
 
-.ticket-item {
+.ticketItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,29 +88,19 @@
     padding: 5px 0;
 }
 
-.ticket-item:last-child {
+.ticketItem:last-child {
     border-bottom: none;
 }
 
-.ticket-button {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid #0c2034;
-    background-color: #0c2034;
-    font-size: 0.8rem;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.summary-container {
+.summaryContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    width: 100%;
+    padding: 2rem;
 }
 
-.summary-table {
+.summaryTable {
     border: 2px solid #ccc;
     border-radius: 10px;
     padding: 15px;
@@ -113,63 +108,47 @@
     margin-bottom: 20px;
 }
 
-.summary-table-head {
+.summaryTableHead {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.summary-table-body {
+.summaryTableBody {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.summary-table-row {
+.summaryTableRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
-.summary-table-header {
+.summaryTableHeader {
     width: 100%;
     text-align: center;
     font-weight: bold;
 }
 
-.summary-table-data {
+.summaryTableData {
     width: 100%;
     text-align: center;
     margin: 10px 0;
 }
 
-.summary-products {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.summary-product {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.summary-buttons {
+.summaryButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
-.summary-button {
+.summaryButton {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid #0c2034;
@@ -178,4 +157,16 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.backButton {
+  background-color: #0c2034;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  margin: 1rem;
+  cursor: pointer;
+  align-self: start;
 }

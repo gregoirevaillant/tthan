@@ -1,25 +1,27 @@
-const Aliment = ({ aliments, onAlimentSelect }) => {
-  const handleAlimentSelect = (aliment) => {
-    onAlimentSelect(aliment);
-  };
+import styles from "./DailyPage.module.css";
 
-  return (
-    <div>
-      <div className="aliments-grid">
-        {aliments.map((aliment, index) => (
-          <button
-            key={index}
-            className={`aliment-item aliment-item-${aliment.category}`}
-            onClick={() => handleAlimentSelect(aliment)}
-          >
-            <div>
-              {aliment.name} : {aliment.price} €
+const Aliment = ({ aliments, onAlimentSelect }) => {
+    return (
+        <div>
+            <div className={styles.alimentsGrid}>
+                {aliments.map((aliment) =>
+                    aliment.price === 0 ? (
+                        <div></div>
+                    ) : (
+                        <button
+                            key={JSON.stringify(aliment)}
+                            className={styles.alimentItem}
+                            onClick={() => onAlimentSelect(aliment)}
+                        >
+                            <div>
+                                {aliment.name} : {aliment.price} €
+                            </div>
+                        </button>
+                    )
+                )}
             </div>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Aliment;
