@@ -1,18 +1,10 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
-
-function HomeButton(props) {
-    const navigate = useNavigate();
+function HomeButton({ destination, children, className }) {
     return (
-        <button
-            className="home-button"
-            onClick={() => {
-                navigate(`/${props.destination}`);
-            }}
-        >
-            {props.children}
-        </button>
+        <Link to={destination} className={className}>
+            {children}
+        </Link>
     );
 }
 

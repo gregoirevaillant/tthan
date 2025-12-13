@@ -129,7 +129,9 @@ function DailyPage() {
             <button className={styles.backButton} onClick={() => navigate("/")}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-
+            <h2>{`Sommaire: ${dailyOrderCount} commande${
+                dailyOrderCount > 1 ? "s" : ""
+            }`}</h2>
             {!dayStarted ? (
                 <button
                     className={styles.summaryButton}

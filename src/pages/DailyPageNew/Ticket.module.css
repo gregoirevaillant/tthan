@@ -1,0 +1,152 @@
+/* --- Ticket / Receipt Styles --- */
+
+.ticketContainer {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    /* Fixed height relative to viewport minus header/padding */
+    height: calc(100vh - 140px); 
+    position: sticky;
+    top: 90px;
+    overflow: hidden; /* Contains the scrollable area */
+    border: 1px solid #e9ecef;
+}
+
+/* Header */
+.ticketHeader {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticketHeader h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #0c2034;
+}
+
+.itemCount {
+    font-size: 0.85rem;
+    color: #666;
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Body (Scrollable) */
+.ticketBody {
+    flex: 1; /* Takes all available remaining space */
+    overflow-y: auto; /* Scroll only this part */
+    padding: 0;
+}
+
+.ticketList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.emptyTicket {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #aaa;
+    font-style: italic;
+}
+
+/* List Items */
+.ticketItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.1s;
+}
+
+.ticketItem:hover {
+    background-color: #fafafa;
+}
+
+.ticketItemInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticketItemName {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.ticketItemPrice {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Delete Button (Trash Icon) */
+.deleteButton {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.deleteButton:hover {
+    color: #dc2626; /* Red on hover */
+    background-color: #fee2e2;
+}
+
+/* Footer (Sticky at bottom of card) */
+.ticketFooter {
+    padding: 1.5rem;
+    border-top: 2px solid #f0f0f0;
+    background-color: white;
+}
+
+.ticketTotalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.ticketTotalAmount {
+    font-weight: 800;
+    color: #0c2034;
+    font-size: 1.4rem;
+}
+
+.validateButton {
+    width: 100%;
+    padding: 1rem;
+    background-color: #0c2034; /* Brand Color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.validateButton:hover {
+    background-color: #1a3a5a;
+}
+
+.validateButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

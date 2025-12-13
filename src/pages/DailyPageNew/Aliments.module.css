@@ -1,0 +1,120 @@
+
+.alimentsGrid {
+    display: grid;
+    /* responsive grid: columns min 140px wide, fits as many as possible */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    gap: 1rem;
+    width: 100%;
+}
+
+.alimentCard {
+    background-color: #f8f9fa; /* Light grey background */
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    min-height: 100px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Hover effect */
+.alimentCard:hover {
+    background-color: #ffffff;
+    border-color: #0c2034; /* Brand color on border */
+    transform: translateY(-3px); /* Slight lift */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Click effect */
+.alimentCard:active {
+    transform: scale(0.98);
+    background-color: #e2e6ea;
+}
+
+.alimentName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.alimentPrice {
+    font-size: 0.9rem;
+    color: #0c2034; /* Brand color */
+    font-weight: 700;
+    background-color: #eef2f5;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.alimentSpacer {
+    /* Kept invisible to maintain grid slots if needed, 
+       otherwise set display: none */
+    visibility: hidden; 
+}
+/* ... keep all previous CSS ... */
+
+/* --- Category Color Themes --- */
+
+/* PLAT (Main Dish) - Warm Orange */
+.catPlat {
+    background-color: #fff4e6;
+    border-color: #ffd8a8;
+}
+.catPlat:hover {
+    background-color: #ffe8cc;
+    border-color: #ffa94d;
+}
+.catPlat .alimentPrice {
+    background-color: #fff;
+    color: #d9480f;
+}
+
+/* BOISSON (Drink) - Fresh Blue */
+.catBoisson {
+    background-color: #e7f5ff;
+    border-color: #a5d8ff;
+}
+.catBoisson:hover {
+    background-color: #d0ebff;
+    border-color: #74c0fc;
+}
+.catBoisson .alimentPrice {
+    background-color: #fff;
+    color: #1c7ed6;
+}
+
+/* DESSERT (Sweet) - Soft Pink */
+.catDessert {
+    background-color: #fff0f6;
+    border-color: #fcc2d7;
+}
+.catDessert:hover {
+    background-color: #fcc2d7;
+    border-color: #f783ac;
+}
+.catDessert .alimentPrice {
+    background-color: #fff;
+    color: #d6336c;
+}
+
+/* AUTRE (Other) - Neutral Grey */
+.catAutre {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+.catAutre:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+.catAutre .alimentPrice {
+    background-color: #fff;
+    color: #495057;
+}

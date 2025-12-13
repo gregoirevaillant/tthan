@@ -1,0 +1,116 @@
+[
+  {
+    "id": "b8c03023",
+    "category": "plat",
+    "name": "Banh mi",
+    "price": 6
+  },
+  {
+    "id": "b8c030as",
+    "category": "plat",
+    "name": "Banh mi VG",
+    "price": 6
+  },
+  {
+    "id": "b8c0307a",
+    "category": "plat",
+    "name": "Banh mi Viet",
+    "price": 3
+  },
+  {
+    "id": "b8c03250",
+    "category": "plat",
+    "name": "Goi cuon",
+    "price": 6
+  },
+  {
+    "id": "b8c03494",
+    "category": "plat",
+    "name": "Plat du jour",
+    "price": 11
+  },
+  {
+    "id": "b8c04abc",
+    "category": "plat",
+    "name": "Jour VG",
+    "price": 11
+  },
+  {
+    "id": "b8c04idh",
+    "category": "plat",
+    "name": "Jour Viet",
+    "price": 5
+  },
+  {
+    "id": "b8c02cd8",
+    "category": "plat",
+    "name": "Bun Bo",
+    "price": 11
+  },
+  {
+    "id": "b8c03692",
+    "category": "plat",
+    "name": "Soupe",
+    "price": 12
+  },
+  {
+    "id": "b8c04434",
+    "category": "boisson",
+    "name": "Eau",
+    "price": 1.5
+  },
+  {
+    "id": "b8c03d36",
+    "category": "boisson",
+    "name": "Soft",
+    "price": 2
+  },
+  {
+    "id": "b8c046be",
+    "category": "boisson",
+    "name": "Coco",
+    "price": 2.5
+  },
+  {
+    "id": "b8c046b3",
+    "category": "boisson",
+    "name": "JOMO",
+    "price": 3
+  },
+  {
+    "id": "b8c04880",
+    "category": "boisson",
+    "name": "Bière",
+    "price": 4
+  },
+  {
+    "id": "b8c04d94",
+    "category": "dessert",
+    "name": "Fruits",
+    "price": 2
+  },
+  {
+    "id": "b8c05776",
+    "category": "dessert",
+    "name": "Crumble",
+    "price": 3
+  },
+  {
+    "id": "b8c04c18",
+    "category": "dessert",
+    "name": "Coeur matcha",
+    "price": 3
+  },
+  {
+    "id": "b8c05118",
+    "category": "dessert",
+    "name": "Tapioca",
+    "price": 3.5
+  },
+  {
+    "id": "b8c05108",
+    "category": "autre",
+    "name": "Couverts",
+    "price": 1
+  }
+]

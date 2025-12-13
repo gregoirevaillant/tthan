@@ -1,0 +1,137 @@
+.homePage {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f6f8;
+    color: #0c2034;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Header --- */
+.homeHeader {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.logoPlaceholder {
+    font-size: 3rem;
+    color: #0c2034;
+    margin-bottom: 1rem;
+}
+
+.homeTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: #0c2034;
+}
+
+.homeSubtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* --- Grid Layout --- */
+.homeGrid {
+    display: grid;
+    /* Responsive: Fits as many columns as possible, min 220px wide */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 2rem;
+    margin-bottom: auto; /* Pushes footer to bottom */
+}
+
+/* --- Button Styling --- */
+.homeButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%; /* Fills the grid cell */
+    height: 200px;
+    background-color: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0,0,0,0.1);
+    color: #0c2034;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+}
+
+/* Note: In CSS modules, we target the class itself. 
+   :global is used if the child component doesn't attach the class correctly,
+   but here we will pass the class via props. */
+.homeButton:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(12, 32, 52, 0.15);
+    background-color: #0c2034;
+    color: white;
+}
+
+.homeButton:active {
+    transform: scale(0.98);
+}
+
+.buttonIcon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+/* --- Footer & Reset --- */
+.homeFooter {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.resetButton {
+    background-color: transparent;
+    color: #dc2626;
+    border: 2px solid #fee2e2;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+    background-color: #fee2e2;
+    border-color: #dc2626;
+}
+
+.versionText {
+    font-size: 0.8rem;
+    color: #bbb;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
