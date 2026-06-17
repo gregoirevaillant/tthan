@@ -1,10 +1,15 @@
 
 .alimentsGrid {
     display: grid;
-    /* responsive grid: columns min 140px wide, fits as many as possible */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    grid-template-columns: repeat(5, minmax(0, 1fr)); 
     gap: 1rem;
     width: 100%;
+}
+
+@media (max-width: 900px) {
+    .alimentsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
 }
 
 .alimentCard {

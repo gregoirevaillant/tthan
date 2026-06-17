@@ -18,6 +18,7 @@ function DailyPageNew() {
     const [dayStarted, setDayStarted] = useState(false);
     const [dailyTotal, setDailyTotal] = useState(0);
     const [dailyOrderCount, setDailyOrderCount] = useState(0);
+    const [dailyPayments, setDailyPayments] = useState({});
     const navigate = useNavigate();
 
     const handleStartDay = () => {
@@ -34,8 +35,10 @@ function DailyPageNew() {
             localStorage.removeItem("dailySummary");
             localStorage.removeItem("dailyTotal");
             localStorage.removeItem("dailyOrderCount");
+            localStorage.removeItem("dailyPayments");
             setDailyTotal(0);
             setDailyOrderCount(0);
+            setDailyPayments({});
             setOrderSummary([]);
             setAllOrders({});
             setDayStarted(false);
@@ -46,9 +49,11 @@ function DailyPageNew() {
         const storedSummary = localStorage.getItem("dailySummary");
         const storedDailyTotal = localStorage.getItem("dailyTotal");
         const storedDailyOrderCount = localStorage.getItem("dailyOrderCount");
+        const storedDailyPayments = localStorage.getItem("dailyPayments");
         if (storedDailyTotal) setDailyTotal(parseFloat(storedDailyTotal));
         if (storedDailyOrderCount)
             setDailyOrderCount(parseFloat(storedDailyOrderCount));
+        if (storedDailyPayments) setDailyPayments(JSON.parse(storedDailyPayments));
         if (storedSummary) {
             const parsedSummary = JSON.parse(storedSummary);
             setOrderSummary(parsedSummary);
@@ -80,7 +85,7 @@ function DailyPageNew() {
         setTotal((prev) => prev - deselected.price);
     };
 
-    const handlePlaceInSummary = () => {
+    const handlePlaceInSummary = (payments = []) => {
         if (selectedAliments.length === 0) return;
 
         const updatedOrderSummary = selectedAliments.reduce(
@@ -105,6 +110,15 @@ function DailyPageNew() {
             const newCount = prev + 1;
             localStorage.setItem("dailyOrderCount", newCount);
             return newCount;
+        });
+        setDailyPayments((prev) => {
+            const updatedPayments = payments.reduce((acc, payment) => {
+                const currentAmount = acc[payment.label] || 0;
+                acc[payment.label] = currentAmount + payment.amount;
+                return acc;
+            }, { ...prev });
+            localStorage.setItem("dailyPayments", JSON.stringify(updatedPayments));
+            return updatedPayments;
         });
         setSelectedAliments([]);
         setTotal(0);
@@ -240,6 +254,19 @@ function DailyPageNew() {
                             </tfoot>
                         </table>
                     </div>
+                    {Object.keys(dailyPayments).length > 0 && (
+                        <div className={styles.paymentSummary}>
+                            <h4>Encaissements</h4>
+                            <div className={styles.paymentSummaryGrid}>
+                                {Object.entries(dailyPayments).map(([label, amount]) => (
+                                    <div key={label} className={styles.paymentSummaryItem}>
+                                        <span>{label}</span>
+                                        <strong>{amount.toFixed(2)} €</strong>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

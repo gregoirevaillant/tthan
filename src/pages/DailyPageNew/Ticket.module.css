@@ -106,6 +106,12 @@
     background-color: #fee2e2;
 }
 
+.deleteButton:disabled {
+    color: #ddd;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+
 /* Footer (Sticky at bottom of card) */
 .ticketFooter {
     padding: 1.5rem;
@@ -125,6 +131,134 @@
     font-weight: 800;
     color: #0c2034;
     font-size: 1.4rem;
+}
+
+.paymentPanel {
+    border-top: 1px solid #eef0f2;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.paymentMethods {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.paymentMethodButton {
+    min-height: 54px;
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #0c2034;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.paymentMethodButton:hover {
+    border-color: #0c2034;
+}
+
+.paymentMethodButton:disabled {
+    cursor: not-allowed;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+}
+
+.paymentMethodButtonActive {
+    background: #0c2034;
+    color: white;
+    border-color: #0c2034;
+}
+
+.paymentEntry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+.paymentInput {
+    min-width: 0;
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.paymentInput:disabled {
+    background: #f3f4f6;
+}
+
+.addPaymentButton {
+    border: none;
+    border-radius: 8px;
+    background: #198754;
+    color: white;
+    cursor: pointer;
+    font-weight: 800;
+    padding: 0 1rem;
+}
+
+.addPaymentButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.paymentList {
+    margin-top: 0.75rem;
+    border: 1px solid #eef0f2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.paymentLine {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eef0f2;
+}
+
+.resetPaymentsButton {
+    width: 100%;
+    border: none;
+    background: #f8f9fa;
+    color: #6b7280;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.resetPaymentsButton:hover {
+    color: #0c2034;
+    background: #eef0f2;
+}
+
+.remainingRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: #f4f6f8;
+    color: #0c2034;
+    font-weight: 800;
 }
 
 .validateButton {
