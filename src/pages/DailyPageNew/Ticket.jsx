@@ -19,6 +19,7 @@ const PAYMENT_METHODS = [
 const toCents = (amount) => Math.round(Number(amount || 0) * 100);
 const fromCents = (amount) => amount / 100;
 const formatPrice = (amount) => `${amount.toFixed(2)} €`;
+const parseAmount = (amount) => Number(String(amount).replace(",", "."));
 
 const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) => {
   const [paymentMethod, setPaymentMethod] = useState("card");
@@ -46,7 +47,10 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
   const handleAddPayment = () => {
     if (!canAddPayment) return;
 
-    const amountCents = paymentAmount === "" ? remainingCents : toCents(paymentAmount);
+    const parsedAmount = parseAmount(paymentAmount);
+    if (paymentAmount !== "" && Number.isNaN(parsedAmount)) return;
+
+    const amountCents = paymentAmount === "" ? remainingCents : toCents(parsedAmount);
     if (amountCents <= 0) return;
 
     const appliedCents = Math.min(amountCents, remainingCents);
@@ -78,13 +82,9 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
 
   const handlePaymentAmountChange = (event) => {
     const value = event.target.value;
-    if (value === "") {
-      setPaymentAmount("");
-      return;
+    if (/^(\d+([,.]\d{0,2})?|[,.]\d{1,2})?$/.test(value)) {
+      setPaymentAmount(value);
     }
-
-    const amountCents = Math.max(0, toCents(value));
-    setPaymentAmount(fromCents(Math.min(amountCents, remainingCents)).toFixed(2));
   };
 
   return (
@@ -152,10 +152,7 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
             <div className={styles.paymentEntry}>
                 <input
                     className={styles.paymentInput}
-                    type="number"
-                    min="0"
-                    max={remaining.toFixed(2)}
-                    step="0.01"
+                    type="text"
                     inputMode="decimal"
                     placeholder={formatPrice(remaining)}
                     value={paymentAmount}
