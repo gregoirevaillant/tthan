@@ -1,8 +1,8 @@
-import { 
-    faUtensils, 
-    faWineGlass, 
-    faCalendarAlt, 
-    faCashRegister, 
+import {
+    // faUtensils,
+    faWineGlass,
+    faCalendarAlt,
+    faCashRegister,
     faLeaf,
     faTrashRestore
 } from "@fortawesome/free-solid-svg-icons";
@@ -33,13 +33,10 @@ function Home() {
             </header>
 
             <div className={styles.homeGrid}>
-                {/* Note: I removed the extra 'button-wrapper' div. 
-                    It's cleaner to let the grid handle the buttons directly. */}
-
-                <HomeButton destination="daily" className={styles.homeButton}>
+                {/* <HomeButton destination="daily" className={styles.homeButton}>
                     <FontAwesomeIcon icon={faUtensils} className={styles.buttonIcon} />
                     <span>Cang-tin</span>
-                </HomeButton>
+                </HomeButton> */}
 
                 <HomeButton destination="daily-new" className={styles.homeButton}>
                     <FontAwesomeIcon icon={faLeaf} className={styles.buttonIcon} />
@@ -51,10 +48,10 @@ function Home() {
                     <span>Évènements</span>
                 </HomeButton>
 
-                <HomeButton destination="vendanges" className={styles.homeButton}>
+                {/* <HomeButton destination="vendanges" className={styles.homeButton}>
                     <FontAwesomeIcon icon={faWineGlass} className={styles.buttonIcon} />
                     <span>Vendanges</span>
-                </HomeButton>
+                </HomeButton> */}
 
                 <HomeButton destination="vendanges-new" className={styles.homeButton}>
                     <FontAwesomeIcon icon={faWineGlass} className={styles.buttonIcon} />

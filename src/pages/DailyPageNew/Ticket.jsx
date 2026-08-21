@@ -35,7 +35,12 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
   const remaining = fromCents(remainingCents);
   const hasPayments = payments.length > 0;
   const canAddPayment = selectedAliments.length > 0 && remainingCents > 0;
-  const canFinishTicket = selectedAliments.length > 0 && totalCents > 0 && remainingCents === 0;
+
+  const parsedEnteredAmount = paymentAmount === "" ? null : parseAmount(paymentAmount);
+  const enteredAmountInvalid = paymentAmount !== "" && Number.isNaN(parsedEnteredAmount);
+  const enteredCents = paymentAmount === "" ? remainingCents : toCents(parsedEnteredAmount || 0);
+  // When the entered amount covers what's left, this payment settles the ticket immediately.
+  const willSettleTicket = canAddPayment && !enteredAmountInvalid && enteredCents >= remainingCents;
 
   useEffect(() => {
     if (selectedAliments.length === 0 || totalCents === 0) {
@@ -45,34 +50,26 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
   }, [selectedAliments.length, totalCents]);
 
   const handleAddPayment = () => {
-    if (!canAddPayment) return;
+    if (!canAddPayment || enteredAmountInvalid || enteredCents <= 0) return;
 
-    const parsedAmount = parseAmount(paymentAmount);
-    if (paymentAmount !== "" && Number.isNaN(parsedAmount)) return;
-
-    const amountCents = paymentAmount === "" ? remainingCents : toCents(parsedAmount);
-    if (amountCents <= 0) return;
-
-    const appliedCents = Math.min(amountCents, remainingCents);
+    const appliedCents = Math.min(enteredCents, remainingCents);
     const method = PAYMENT_METHODS.find((item) => item.key === paymentMethod);
+    const newPayment = {
+      method: paymentMethod,
+      label: method?.label || paymentMethod,
+      amount: fromCents(appliedCents),
+    };
 
-    setPayments((prev) => [
-      ...prev,
-      {
-        method: paymentMethod,
-        label: method?.label || paymentMethod,
-        amount: fromCents(appliedCents),
-      },
-    ]);
-    setPaymentAmount("");
-  };
-
-  const handleFinishTicket = () => {
-    if (!canFinishTicket) return;
-    onPlaceInSummary(payments);
-    setPayments([]);
-    setPaymentAmount("");
-    setPaymentMethod("card");
+    if (appliedCents >= remainingCents) {
+      // Fully paid: settle straight away, no separate confirmation step.
+      onPlaceInSummary([...payments, newPayment]);
+      setPayments([]);
+      setPaymentAmount("");
+      setPaymentMethod("card");
+    } else {
+      setPayments((prev) => [...prev, newPayment]);
+      setPaymentAmount("");
+    }
   };
 
   const handleResetPayments = () => {
@@ -165,7 +162,7 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
                     onClick={handleAddPayment}
                     disabled={!canAddPayment}
                 >
-                    Ajouter
+                    {willSettleTicket ? "Valider" : "Ajouter"}
                 </button>
             </div>
             {payments.length > 0 && (
@@ -191,13 +188,6 @@ const Ticket = ({ selectedAliments, total, onAlimentRemove, onPlaceInSummary }) 
                 <span>{formatPrice(remaining)}</span>
             </div>
         </div>
-        <button 
-            className={styles.validateButton} 
-            onClick={handleFinishTicket}
-            disabled={!canFinishTicket}
-        >
-          Terminer le ticket
-        </button>
       </div>
     </div>
   );
