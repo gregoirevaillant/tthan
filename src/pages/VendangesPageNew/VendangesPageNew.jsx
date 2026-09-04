@@ -29,7 +29,7 @@ function VendangesPageNew() {
         { id: 2, name: "Nems poulet", quantity: 0, price: 5 },
         { id: 3, name: "Samoussa légumes", quantity: 0, price: 5 },
         { id: 4, name: "Bún bò", quantity: 0, price: 13 },
-        { id: 5, name: "Bún bò + nems", quantity: 0, price: 14 },
+        { id: 5, name: "Bún bò + nems", quantity: 0, price: 14.5 },
         { id: 6, name: "Wok nouilles", quantity: 0, price: 12 },
         { id: 7, name: "Fruits", quantity: 0, price: 2.5 },
         { id: 8, name: "Tapioca", quantity: 0, price: 3.5 },
