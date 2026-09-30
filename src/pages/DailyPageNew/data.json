@@ -24,6 +24,12 @@
     "price": 6
   },
   {
+    "id": "b8c04a3k",
+    "category": "0",
+    "name": "0",
+    "price": 0
+  },
+  {
     "id": "b8c03494",
     "category": "plat",
     "name": "Plat du jour",
@@ -45,19 +51,13 @@
     "id": "b8c02cd8",
     "category": "plat",
     "name": "Bun Bo",
-    "price": 11
+    "price": 12
   },
   {
     "id": "b8c03692",
     "category": "plat",
     "name": "Soupe",
-    "price": 12
-  },
-  {
-    "id": "b8c04a3k",
-    "category": "0",
-    "name": "0",
-    "price": 0
+    "price": 13
   },
   {
     "id": "b8c04434",
@@ -93,7 +93,7 @@
     "id": "b8c04d94",
     "category": "dessert",
     "name": "Fruits",
-    "price": 2
+    "price": 2.5
   },
   {
     "id": "b8c05776",
